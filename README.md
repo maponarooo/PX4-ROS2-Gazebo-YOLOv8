@@ -9,22 +9,18 @@ Aerial Object Detection using a Drone with PX4 Autopilot and ROS 2. PX4 SITL and
 You need several terminals.
 ```commandline
 Terminal #1:
-cd ~/Micro-XRCE-DDS-Agent
-MicroXRCEAgent udp4 -p 8888
-
-Terminal #2:
 cd ~/PX4-Autopilot
 PX4_SYS_AUTOSTART=4002 PX4_GZ_MODEL_POSE="268.08,-128.22,3.86,0.00,0,-0.7" PX4_GZ_MODEL=x500_depth ./build/px4_sitl_default/bin/px4
 
-Terminal #3:
+Terminal #2:
 ros2 run ros_gz_image image_bridge /camera
 
-Terminal #4:
+Terminal #3:
 source ~/px4-venv/bin/activate
 cd ~/PX4-ROS2-Gazebo-YOLOv8
 python uav_camera_det.py
 
-Terminal #5:
+Terminal #4:
 source ~/px4-venv/bin/activate
 cd ~/PX4-ROS2-Gazebo-YOLOv8
 python keyboard-mavsdk-test.py
