@@ -10,7 +10,8 @@ You need several terminals.
 ```commandline
 Terminal #1:
 cd ~/PX4-Autopilot
-PX4_SYS_AUTOSTART=4002 PX4_GZ_MODEL_POSE="268.08,-128.22,3.86,0.00,0,-0.7" PX4_GZ_MODEL=x500_depth ./build/px4_sitl_default/bin/px4
+export PX4_GZ_MODEL_POSE="268.08,-128.22,3.86,0.00,0,-0.7"
+make px4_sitl gz_x500_depth_raceway
 
 Terminal #2:
 ros2 run ros_gz_image image_bridge /camera
