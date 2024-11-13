@@ -2,7 +2,7 @@
 Aerial Object Detection using a Drone with PX4 Autopilot and ROS 2. PX4 SITL and Gazebo Garden used for Simulation. YOLOv8 used for Object Detection.
 
 ## Demo
-[https://github.com/monemati/PX4-ROS2-Gazebo-YOLOv8/assets/58460889/fab19f49-0be6-43ea-a4e4-8e9bc8d59af9](https://youtu.be/WqNVXrTJ0ac)
+[![PX4-ROS2-Gazebo-YOLOv8](https://img.youtube.com/vi/WqNVXrTJ0ac/0.jpg)]([동영상 링크](https://youtu.be/WqNVXrTJ0ac))
 
 ## Run
 ### Fly using Keyboard
