@@ -12,23 +12,20 @@ from cv_bridge import CvBridge # Package to convert between ROS and OpenCV Image
 import cv2 # OpenCV library
 from ultralytics import YOLO # YOLO library
 
-# Load the YOLOv8 model
+# YOLOv8 모델 사용
 model = YOLO('yolov8m.pt')
 
 
 class ImageSubscriber(Node):
   """
-  Create an ImageSubscriber class, which is a subclass of the Node class.
+  Node 클래스의 서브클래스인 ImageSubscriber 클래스를 생성.
   """
   def __init__(self):
-    """
-    Class constructor to set up the node
-    """
-    # Initiate the Node class's constructor and give it a name
+    # Node 클래스 생성자
     super().__init__('image_subscriber')
       
-    # Create the subscriber. This subscriber will receive an Image
-    # from the video_frames topic. The queue size is 10 messages.
+    # Subscriber를 생성.
+    # 이 구독자는 video_frames 토픽으로 부터 이미지를 받아오고 큐 사이즈는 10개로 정의.
     self.subscription = self.create_subscription(
       Image, 
       'camera', 
@@ -36,43 +33,41 @@ class ImageSubscriber(Node):
       10)
     self.subscription # prevent unused variable warning
       
-    # Used to convert between ROS and OpenCV images
+    # ROS의 이미지를 OpenCV 이미지로 변경하기 위해 사용
     self.br = CvBridge()
    
   def listener_callback(self, data):
     """
     Callback function.
     """
-    # Display the message on the console
+    # 메시지를 콘솔에 뿌려준다.
     self.get_logger().info('Receiving video frame')
  
-    # Convert ROS Image message to OpenCV image
+    # ROS의 이미지를 OpenCV 이미지로 변경
     current_frame = self.br.imgmsg_to_cv2(data, desired_encoding="bgr8")
     image = current_frame
-    # Object Detection
+    # 객체 인식
     results = model.predict(image, classes=[0, 2])
     img = results[0].plot()
-    # Show Results
+    # 결과를 보여줌
     cv2.imshow('Detected Frame', img)    
     cv2.waitKey(1)
   
 def main(args=None):
   
-  # Initialize the rclpy library
+  # rclpy library 초기화
   rclpy.init(args=args)
   
-  # Create the node
+  # 노드 생성
   image_subscriber = ImageSubscriber()
   
-  # Spin the node so the callback function is called.
+  # Spin 노드
   rclpy.spin(image_subscriber)
   
-  # Destroy the node explicitly
-  # (optional - otherwise it will be done automatically
-  # when the garbage collector destroys the node object)
+  # 노드 종료
   image_subscriber.destroy_node()
   
-  # Shutdown the ROS client library for Python
+  # ROS 프로그램 종료
   rclpy.shutdown()
   
 if __name__ == '__main__':
