@@ -1,3 +1,6 @@
+# - 쿼드(QUAD)드론연구소
+# - https://github.com/maponarooo/PX4-ROS2-Gazebo-YOLOv8
+
 import asyncio
 import random
 from mavsdk import System
